@@ -32,6 +32,10 @@ pipeline{
         stage("Trivy File System Scan"){
             steps{
                 sh "trivy fs --format  table -o trivy-fs-report.html ."
+                sh "trivy image wanderlust-backend"
+                sh "trivy image wanderlust-frontend"
+                sh "trivy image redis"
+                sh "trivy image mongodb"
             }
         }
         stage("Deploy using Docker compose"){
